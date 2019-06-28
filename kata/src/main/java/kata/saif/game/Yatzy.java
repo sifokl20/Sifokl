@@ -2,11 +2,10 @@ package kata.saif.game;
 
 import java.util.Arrays;
 import java.util.function.IntPredicate;
+import java.util.stream.IntStream;
 
 import kata.saif.types.TypeStraight;
 import kata.saif.utils.Utils;
-
-
 
 public class Yatzy {
 
@@ -22,6 +21,7 @@ public class Yatzy {
 		}
 		return 0;
 	}
+
 	public static int ones(int d1, int d2, int d3, int d4, int d5) {
 		return Utils.sumSame(1, d1, d2, d3, d4, d5);
 	}
@@ -45,8 +45,8 @@ public class Yatzy {
 		dice[4] = _5;
 	}
 
-public int fours() {
-		
+	public int fours() {
+
 		return Utils.sumSame(4, dice);
 	}
 
@@ -59,7 +59,7 @@ public int fours() {
 	}
 
 	public static int score_pair(int d1, int d2, int d3, int d4, int d5) {
-		return Utils.scoreOccurence(2,  d1,  d2,  d3, d4,  d5);
+		return Utils.scoreOccurence(2, d1, d2, d3, d4, d5);
 	}
 
 	public static int two_pair(int d1, int d2, int d3, int d4, int d5) {
@@ -90,46 +90,28 @@ public int fours() {
 		return Utils.scoreOccurence(3, d1, d2, d3, d4, d5);
 	}
 
-public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
-		
+	public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
+
 		return Utils.scoreStraight(TypeStraight.SMALL, d1, d2, d3, d4, d5);
 	}
 
 	public static int largeStraight(int d1, int d2, int d3, int d4, int d5) {
 		return Utils.scoreStraight(TypeStraight.LARGE, d1, d2, d3, d4, d5);
-		
+
 	}
 
 	public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {
-		int[] tallies;
-		boolean _2 = false;
-		int i;
-		int _2_at = 0;
-		boolean _3 = false;
-		int _3_at = 0;
-
-		tallies = new int[6];
-		tallies[d1 - 1] += 1;
-		tallies[d2 - 1] += 1;
-		tallies[d3 - 1] += 1;
-		tallies[d4 - 1] += 1;
-		tallies[d5 - 1] += 1;
-
-		for (i = 0; i != 6; i += 1)
-			if (tallies[i] == 2) {
-				_2 = true;
-				_2_at = i + 1;
-			}
-
-		for (i = 0; i != 6; i += 1)
-			if (tallies[i] == 3) {
-				_3 = true;
-				_3_at = i + 1;
-			}
-
-		if (_2 && _3)
-			return _2_at * 2 + _3_at * 3;
-		else
-			return 0;
+		//fast way to calculate lenght of distnct elements to know if it s
+		// full house or not
+		//mainly used to exclude the two combinations : 2,2,3,3,4  and 4,4,4,4,4
+		int lenghtOfDistinctElements = IntStream.of(  new int[]{d1,d2,d3, d4, d5}).distinct().toArray().length;
+		
+		
+		if (Utils.scoreOccurence(2, d1, d2, d3, d4, d5) > 0
+				&& Utils.scoreOccurence(3, d1, d2, d3, d4, d5) > 0
+				&& lenghtOfDistinctElements == 2) {
+			return Utils.sumInts(d1, d2, d3, d4, d5);
+		}
+		return 0;
 	}
 }
