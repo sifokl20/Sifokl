@@ -61,6 +61,6 @@ public class UtilsTest {
 		assertEquals("error sumSame :  expected "+expected+" , calculated "+calculated+" ; ",expected,calculated);
 		
 	}
-	
+
 
 }

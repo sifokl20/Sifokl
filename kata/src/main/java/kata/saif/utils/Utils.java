@@ -27,6 +27,24 @@ public class Utils {
 		return 0;
 	}
 	
+	public static int scoreTwoPairs(int... ints){
+		
+		int[] data = initilizeTab(ints[0], ints[1], ints[2], ints[3], ints[4]);
+		int n = 0;
+		int score = 0;
+		for (int i = 0; i < 6; i += 1)
+			if (data[6 - i - 1] >= 2) {
+				n++;
+				score += (6 - i);
+			}
+		if (n == 2)
+			return score * 2;
+		else
+			return 0;
+		
+		
+	}
+	
 	
 	private static int[] initilizeTab(int d1, int d2, int d3, int d4, int d5) {
 
