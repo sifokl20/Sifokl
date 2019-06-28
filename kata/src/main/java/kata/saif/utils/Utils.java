@@ -2,6 +2,8 @@ package kata.saif.utils;
 
 import java.util.Arrays;
 
+import kata.saif.types.TypeStraight;
+
 public class Utils {
 	public static int sumInts(int... ints) {
 
@@ -25,6 +27,7 @@ public class Utils {
 		return 0;
 	}
 	
+	
 	private static int[] initilizeTab(int d1, int d2, int d3, int d4, int d5) {
 
 		int[] counts = new int[6];
@@ -35,6 +38,37 @@ public class Utils {
 		counts[d5 - 1]++;
 
 		return counts;
+
+	}
+	
+	public static int scoreStraight(TypeStraight type , int... ints){
+		int[] counts = initilizeCounterTab(ints[0], ints[1], ints[2], ints[3], ints[4]);
+		switch (type){
+		case SMALL : 
+			return scoreStraight(0,4, counts, 15);
+		default :
+		 return scoreStraight(1,5, counts , 20);
+		}
+	}
+
+	private static int scoreStraight(int from, int to, int[] tallies, int expectedScore) {
+
+		for(int i = from ; i<to; i++){
+			if(tallies[i+1]!=1) return 0;
+		}
+		return expectedScore;
+	}
+	private static int[] initilizeCounterTab(int d1, int d2, int d3, int d4, int d5) {
+
+		int[] tallies;
+		tallies = new int[6];
+		tallies[d1 - 1] += 1;
+		tallies[d2 - 1] += 1;
+		tallies[d3 - 1] += 1;
+		tallies[d4 - 1] += 1;
+		tallies[d5 - 1] += 1;
+
+		return tallies;
 
 	}
 	
