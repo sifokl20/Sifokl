@@ -55,7 +55,7 @@ public class UtilsTest {
 	}
 	
 	@Test
-	public void scorePair_test(){
+	public void scoreOccurence_test(){
 		int expected = 12;
 		int calculated = Utils.scoreOccurence(2,6,1,5,5,6);
 		assertEquals("error sumSame :  expected "+expected+" , calculated "+calculated+" ; ",expected,calculated);
