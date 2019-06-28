@@ -1,6 +1,7 @@
 package kata.saif.utils;
 
 import static org.junit.Assert.assertEquals;
+import kata.saif.types.TypeStraight;
 
 import org.junit.Test;
 
@@ -62,5 +63,22 @@ public class UtilsTest {
 		
 	}
 
+	
+	@Test 
+	public void scoreStraight_SMALL_test(){
+		int expected = 15;
+		int calculated = Utils.scoreStraight(TypeStraight.SMALL, 1,2,3,4,5);
+		assertEquals("error sumSame :  expected "+expected+" , calculated "+calculated+" ; ",expected,calculated);
+		
+	}
+	
+	@Test 
+	public void scoreStraight_LARGE_test(){
+		int expected = 20;
+		int calculated = Utils.scoreStraight(TypeStraight.LARGE, 2,3,4,5,6);
+		assertEquals("error sumSame :  expected "+expected+" , calculated "+calculated+" ; ",expected,calculated);
+		
+	}
+	
 
 }
